@@ -1,18 +1,11 @@
 import lejos.nxt.*;
 
-/**
- * Standard file for LeJOS robots
- * Change every "Robot" below with the name of your program. eg "WallFinder"
- * Save the file with the same name. eg "WallFinder.java"
- *
- * @author	Mr Burt
+ /* @author	Mr Burt
  *@ edited by Matthew Baker, Thomas Bellato, Alexis Lanuza
- * @version	0.1
+ * @version	0.2
  */
 
 public class mazerun {
-
-
 
 	/**
 	 * declare variables here
@@ -43,7 +36,10 @@ public class mazerun {
 	 */
 	private void run() {
 		//Order of priority light intensity then distance
-		
+		//check light intensity
+		//check distance 
+		//action
+
 
 
 	}
