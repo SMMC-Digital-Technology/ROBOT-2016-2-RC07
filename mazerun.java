@@ -34,11 +34,35 @@ public class mazerun {
 	/**
 	 * This is where the robot searches for the person
 	 */
+	 //lilev = light level
+	 //anom = Bright object anomaly e.g person
+	 //dist = distance
 	private void run() {
 		//Order of priority light intensity then distance
+	  int lilev = light.getLightValue();
+		int anom = light.getLightValue() + 5;
+	  int dist = ultra.getDistance();
+		int thresh = THRESHOLD
 		//check light intensity
-		//check distance 
+    if (lilev < anom) {
+			while (thresh < dist) {
+				boolean distcheck = true;
+				Motor.A.Forward();
+				Motor.C.Backward();
+		}
+		distcheck = false;
+		Motor.A.
+
+
+
+			}
+
+
+
+		}
+		//check distance
 		//action
+
 
 
 
