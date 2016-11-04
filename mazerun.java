@@ -49,26 +49,30 @@ public class mazerun {
 				//searches for distance < THRESHOLD
 				Motor.A.Forward();
 				Motor.C.Backward();
-				dist = ultra.getDistance();
+			  ultra.getDistance();
+				light.getLightValue();
 			}
 			// this code
 			boolean distcheck = false;
 			//robot moves forward
 			Motor.A.forward();
 			Motor.C.forward();
-			dist = ultra.getDistance();
+			ultra.getDistance();
+			light.getLightValue();
 		} else {
 			if (dist > THRESHOLD)
 			{//moving towards person
 				 Motor.A.forward();
 				Motor.C.forward();
 				dist = ultra.getDistance();
+				light.getLightValue();
 			} else {
 				//action done if person found
 				beepSequence();
 				Motor.A.stop();
 				Motor.C.stop();
 				dist = ultra.getDistance();
+				light.getLightValue();
 			}
 		}
 		button.waitForAnyPress();
