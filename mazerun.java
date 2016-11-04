@@ -46,25 +46,32 @@ public class mazerun {
     if (lilev < anom)
 		{	while (dist < THRESHOLD)
 			{ boolean distcheck = true;
+				//searches for distance < THRESHOLD
 				Motor.A.Forward();
 				Motor.C.Backward();
 				dist = ultra.getDistance();
 			}
 			// this code
 			boolean distcheck = false;
+			//robot moves forward
 			Motor.A.forward();
 			Motor.C.forward();
+			dist = ultra.getDistance();
 		} else {
 			if (dist > THRESHOLD)
-			{ Motor.A.forward();
+			{//moving towards person
+				 Motor.A.forward();
 				Motor.C.forward();
+				dist = ultra.getDistance();
 			} else {
+				//action done if person found
 				beepSequence();
 				Motor.A.stop();
 				Motor.C.stop();
-				Button.waitForAnyPress();
+				dist = ultra.getDistance();
 			}
 		}
+		button.waitForAnyPress();
 	}
 
 	/**
