@@ -7,18 +7,19 @@ import lejos.nxt.*;
 
 public class mazerun {
 
-	/**
+	/*
 	 * declare variables here
 	 */
 	private LightSensor light;
  	private UltrasonicSensor ultra;
 
 	private int dist = 0;
+
 	private final int THRESHOLD = 10;
 	/**
 	 * Constructs the robot and sets up the sensors and initial values of variables
 	 */
-	public mazerun () {
+	public mazerun() {
 		// setup sensors
 		light = new LightSensor(SensorPort.S1);
 		ultra = new UltrasonicSensor(SensorPort.S2);
