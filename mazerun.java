@@ -13,9 +13,7 @@ public class mazerun {
 	private LightSensor light;
  	private UltrasonicSensor ultra;
 
-	private int dist = 0;
-
-	private final int THRESHOLD = 10;
+	private final int THRESHOLD = 15;
 	/**
 	 * Constructs the robot and sets up the sensors and initial values of variables
 	 */
@@ -38,18 +36,20 @@ public class mazerun {
 	 //lilev = light level
 	 //anom = Bright object anomaly e.g person
 	 //dist = distance
-	private void run();
-	{//Order of priority light intensity then distance
+	private void run() {
+		//Order of priority light intensity then distance
 	  int lilev = light.getLightValue();
 		int anom = light.getLightValue() + 5;
 	  int dist = ultra.getDistance();
+		boolean loop = true;
+		while (loop) {
 		//check light intensity
-    if (lilev < anom)
-		{	while (dist < THRESHOLD)
-			{ boolean distcheck = true;
+    if (lilev < anom)	{
+			while (dist < THRESHOLD) {
+				boolean distcheck = true;
 				//searches for distance < THRESHOLD
-				Motor.A.Forward();
-				Motor.C.Backward();
+				Motor.A.forward();
+				Motor.C.backward();
 			  ultra.getDistance();
 				light.getLightValue();
 			}
@@ -69,14 +69,17 @@ public class mazerun {
 				light.getLightValue();
 			} else {
 				//action done if person found
-				beepSequence();
+				Sound.beepSequence();
 				Motor.A.stop();
 				Motor.C.stop();
 				dist = ultra.getDistance();
 				light.getLightValue();
 			}
 		}
-		button.waitForAnyPress();
+		if (Button.ENTER.isDown()){
+			loop = false;
+		}
+	}
 	}
 
 	/**
