@@ -12,12 +12,18 @@ public class labyrinth {
 	 */
 	private LightSensor light;
  	private UltrasonicSensor ultra;
+	private Tacho1 tac1;
+	private Tacho2 tac2;
 //dist = distance
 //lilev = light level
 //anom = bright object anomaly
+//tac 1 = A Motor
+//tac 2 = C Motor
   private int dist = ultra.getDistance();
 	private int lilev = light.getLightValue();
-	private int anom = light.getLightValue();
+	private int anom = light.getLightValue() + 5;
+	private int Tacho1 = tac1.getTachoCount();
+	private int Tacho1 = tac2.getTachocount();
 
 	private final int THRESHOLD = 10;
 	/**
@@ -27,13 +33,10 @@ public class labyrinth {
 		// setup sensors
 		light = new LightSensor(SensorPort.S1)
 		ultra = new UltrasonicSensor(SensorPort.S2)
-
-
+		tac1 = new Tacho1(MotorPort.A)
+		tac2 = new Tacho2(MotorPort.C)
 		// setup values
-
-
 		run();
-
 	}
 
 	//define light = defli
@@ -42,10 +45,31 @@ public class labyrinth {
 			anom = lilev;
 		}
 	}
+	
+	// turn, break loop when light is found.
+	/
+	private void turnSearch(); {
+		tac1.resetTachoCount();
+		tac2.resetTachoCount();
+		if (Tacho1 > 0) && (Tacho2 < 0) {
+			//anticlockwise turn
+		} else if (Tacho 1 < 0) && (Tacho2 > 0)
+		{
+			//clockwise turn
+		}
+		//find way to break loop when light detected
+
+	}
 
 
-	//light seeking function
-	private void lightseek() {
+
+	//find space to search
+	private void search(lilev, dist, anom) {
+		boolean locate = true;
+		while (search) {
+			//prioritse light then distance
+
+		}
 
 
 	}
@@ -61,8 +85,15 @@ public class labyrinth {
 			while (lilev < anom ) {
 				if (dist < THRESHOLD)
 				{ //stop, find area to search
-					//code here
-				} else {
+					Motor.A.stop();
+					Motor.C.stop();
+					delay.msDelay(3000);
+					search();
+					ultra.getDistance();
+					light.getLightValue();
+					//function here
+				} else
+				{
 					//forward
 					Motor.A.forward();
 					Motor.C.forward();
@@ -75,7 +106,7 @@ public class labyrinth {
 				Motor.A.stop();
 				Motor.C.stop();
 				delay.msDelay(2000);
-				lightseek();
+				// function here
 				ultra.getDistance();
 				light.getLightValue();
 			}  else
@@ -85,14 +116,11 @@ public class labyrinth {
 				ultra.getDistance();
 				light.getLightValue();
 			}
-		}
 		if (Button.ENTER.isDown()) {
 			loop = false;
-
+			button.waitForAnyPress();
 		}
-
 	}
-
 	/**
 	 * The main function executes the robot.
 	 * @param args Not used.
