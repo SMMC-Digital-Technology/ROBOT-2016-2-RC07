@@ -12,18 +12,19 @@ public class labyrinth {
 	 */
 	private LightSensor light;
  	private UltrasonicSensor ultra;
-	private Tacho1 tac1;
-	private Tacho2 tac2;
+	private TouchSensor tleft;
+	private TouchSensor tright;
 //dist = distance
 //lilev = light level
 //anom = bright object anomaly
-//tac 1 = A Motor
-//tac 2 = C Motor
+//tac 1 = A Motor left
+//tac 2 = C Motor left
+//Tosen = touch sensor 1 = left 2 = right
   private int dist = ultra.getDistance();
 	private int lilev = light.getLightValue();
 	private int anom = light.getLightValue() + 5;
-	private int Tacho1 = tac1.getTachoCount();
-	private int Tacho1 = tac2.getTachocount();
+	private int Tacho1 = Motor.A.getTachoCount();
+	private int Tacho1 = Motor.C.getTachocount();
 
 	private final int THRESHOLD = 10;
 	/**
@@ -31,10 +32,12 @@ public class labyrinth {
 	 */
 	public labyrinth() {
 		// setup sensors
-		light = new LightSensor(SensorPort.S1)
-		ultra = new UltrasonicSensor(SensorPort.S2)
-		tac1 = new Tacho1(MotorPort.A)
-		tac2 = new Tacho2(MotorPort.C)
+		light = new LightSensor(SensorPort.S1);
+		ultra = new UltrasonicSensor(SensorPort.S2);
+		tleft = new TouchSensor(Sensorport.S3);
+		tright = new TouchSensor(Sensorport.S4);
+		Motor.A.resetTachoCount();
+		Motor.C.resetTachoCount();
 		// setup values
 		run();
 	}
@@ -45,32 +48,32 @@ public class labyrinth {
 			anom = lilev;
 		}
 	}
-	
+
 	// turn, break loop when light is found.
-	/
-	private void turnSearch(); {
-		tac1.resetTachoCount();
-		tac2.resetTachoCount();
-		if (Tacho1 > 0) && (Tacho2 < 0) {
+	//turnDet = Turn determine
+	private void turnDet(); {
+		while (lilev < anom) {
+		if (Tacho1 < Tacho2) {
 			//anticlockwise turn
-		} else if (Tacho 1 < 0) && (Tacho2 > 0)
+		}
+			while (dist < THRESHOLD) {
+				Motor.A.Backward();
+				Motor.C.Forward()
+				Light.getLightValue();
+				Ultra.getDistance();
+				Tacho1.getTachocount();
+				Tacho2.getTachocount();
+
+			}
+		} else if (Tacho2 < 0) && (Tacho2 > 0)
 		{
+			while (dist < THRESHOLD)
 			//clockwise turn
+			Motor.A.Forward();
+			Motor.C.Backward();
 		}
-		//find way to break loop when light detected
-
 	}
-
-
-
-	//find space to search
-	private void search(lilev, dist, anom) {
-		boolean locate = true;
-		while (search) {
-			//prioritse light then distance
-
-		}
-
+		//find way to break loop when light detected
 
 	}
 
@@ -83,23 +86,45 @@ public class labyrinth {
 	boolean loop = true;
 		while (loop) {
 			while (lilev < anom ) {
-				if (dist < THRESHOLD)
-				{ //stop, find area to search
+				if (dist < THRESHOLD) & (tleft.isPressed())
+				{ //stop, turn right
 					Motor.A.stop();
 					Motor.C.stop();
 					delay.msDelay(3000);
-					search();
+					Motor.A.resetTachoCount();
+					Motor.C.resetTachoCount();
+					while (dist < THRESHOLD + 2) {
+						Motor.A.forward();
+						Motor.C.backward();
+					}
 					ultra.getDistance();
 					light.getLightValue();
-					//function here
-				} else
-				{
-					//forward
-					Motor.A.forward();
-					Motor.C.forward();
-					ultra.getDistance();
-					light.getLightValue();
-				}
+					Motor.A.getTachocount();
+					Motor.C.getTachocount();
+				} else if (dist < THRESHOLD) & (tright.isPressed()) {
+					//stop turn left
+				Motor.A.stop();
+				Motor.C.stop();
+				delay.msDelay(3000);
+				Motor.A.resetTachoCount();
+				Motor.C.resetTachoCount();
+				while (dist < THRESHOLD);
+				Motor.A.backward();
+				Motor.C.forward();
+			}
+			ultra.getDistance();
+			light.getLightValue();
+			Motor.A.getTachoCount();
+			Motor.C.getTachoCount();
+		} //conditions (go through all possible combinations)
+		//find way to store taachometer reading as variable
+		
+
+			{
+
+			}
+
+
 			}
 			//once lilev is greater than anom
 			if (dist < THRESHOLD) {
@@ -107,6 +132,7 @@ public class labyrinth {
 				Motor.C.stop();
 				delay.msDelay(2000);
 				// function here
+
 				ultra.getDistance();
 				light.getLightValue();
 			}  else
