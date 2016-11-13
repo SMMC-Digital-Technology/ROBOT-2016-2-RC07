@@ -67,8 +67,8 @@ public class labyrinth {
 				Motor.C.resetTachoCount();
 				Motor.A.rotateTo(-900);
 				Motor.C.rotateTo(900)
-				Light.getLightValue();
-				Ultra.getDistance();
+				light.getLightValue();
+				ultra.getDistance();
 				Tacho1 = Motor.A.getTachoCount();
 				Tacho2 = Motor.C.getTachoCount();
 				defli();
@@ -80,8 +80,8 @@ public class labyrinth {
 			Motor.C.resetTachoCount();
 			Motor.A.rotateTo(900);
 			Motor.C.rotateTo(-900);
-			Light.getLightValue();
-			Ultra.getDistance();
+			light.getLightValue();
+			ultra.getDistance();
 			Tacho1 = Motor.A.getTachoCount();
 			Tacho2 = Motor.C.getTachoCount();
 		}
@@ -168,8 +168,9 @@ public class labyrinth {
 							Tacho2 = Motor.C.getTachoCount();
 							defli();
 						} else {
+							//go forward until object
 							Motor.A.resetTachoCount();
-							Motor.C>resetTachoCount()
+							Motor.C.resetTachoCount()
 							Motor.A.forward();
 							Motor.C.forward();
 							Tacho1 = Motor.A.getTachoCount();
@@ -184,7 +185,7 @@ public class labyrinth {
 				Motor.A.stop();
 				Motor.C.stop();
 				delay.msDelay(2000);
-				turnDet();
+			  Sound.beepSequenceUp();
 				ultra.getDistance();
 				light.getLightValue();
 			}  else
